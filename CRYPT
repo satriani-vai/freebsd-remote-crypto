@@ -33,8 +33,8 @@ gpart add -b 64 -s 64k   -t freebsd-boot       $geom0
 gpart add -b 64 -s 64k   -t freebsd-boot       $geom1
 gpart add -l boot0 -s 1G -t freebsd-ufs  -a 4k $geom0 # 512M is absolute minimum, the kernel is so large.
 gpart add -l boot1 -s 1G -t freebsd-ufs  -a 4k $geom1
-gpart add -l swap0 -s 2G -t freebsd-swap -a 4k $geom0
-gpart add -l swap1 -s 2G -t freebsd-swap -a 4k $geom1
+gpart add -l swap0 -s 4G -t freebsd-swap -a 4k $geom0
+gpart add -l swap1 -s 4G -t freebsd-swap -a 4k $geom1
 gpart add -l zroot0      -t freebsd-zfs  -a 4k $geom0
 gpart add -l zroot1      -t freebsd-zfs  -a 4k $geom1
 
