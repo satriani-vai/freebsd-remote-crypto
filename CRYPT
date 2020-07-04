@@ -14,9 +14,17 @@ if [ "$(uname -s)" != "FreeBSD" ] ; then
 fi
 
 if [ ! -f $bsd/base.txz ] ; then
-	pkg update
-	pkg install -y wget
-	wget -P $bsd -nd --no-parent -r ftp://ftp.freebsd.org/pub/FreeBSD/releases/$(uname -m)/$(uname -r |sed 's/-.*/-RELEASE/')/
+	ftp -n -v <<FTP_SCRIPT
+	open ftp.freebsd.org
+	quote USER anonymous
+	quote PASS
+	ascii
+	cd pub/FreeBSD/releases/$(uname -m)/$(uname -r |sed 's/-.*/-RELEASE/')/
+	lcd $bsd
+	promt
+	mget *
+	bye
+	FTP_SCRIPT
 fi
 
 bin=$(dirname $0)
