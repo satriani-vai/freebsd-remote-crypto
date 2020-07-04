@@ -14,6 +14,7 @@ if [ "$(uname -s)" != "FreeBSD" ] ; then
 fi
 
 if [ ! -f $bsd/base.txz ] ; then
+	mkdir $bsd
 	ftp -n -v <<FTP_SCRIPT
 	open ftp.freebsd.org
 	quote USER anonymous
