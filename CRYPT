@@ -14,18 +14,17 @@ if [ "$(uname -s)" != "FreeBSD" ] ; then
 fi
 
 if [ ! -f $bsd/base.txz ] ; then
-	mkdir $bsd
-	ftp -n -v <<FTP_SCRIPT
-	open ftp.freebsd.org
-	quote USER anonymous
-	quote PASS
-	ascii
-	cd pub/FreeBSD/releases/$(uname -m)/$(uname -r |sed 's/-.*/-RELEASE/')/
-	lcd $bsd
-	promt
-	mget *
-	bye
-	FTP_SCRIPT
+	[ -d $bsd ] && echo OK
+ftp -i -n -v <<FTP_SCRIPT
+open ftp.freebsd.org
+quote USER anonymous
+quote PASS
+ascii
+cd pub/FreeBSD/releases/$(uname -m)/$(uname -r |sed 's/-.*/-RELEASE/')/
+lcd $bsd
+mget *
+bye
+FTP_SCRIPT
 fi
 
 bin=$(dirname $0)
